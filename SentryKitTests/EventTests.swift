@@ -22,30 +22,19 @@ class EventTests: XCTestCase {
     }
     
     func testDefaultCreation() {
-        let event = Event(message: "Hello")
+        let event = Event(message: "Hello", context: Context())
         XCTAssertEqual(event.message, "Hello")
         XCTAssertEqual(event.level, .error)
-        XCTAssertEqual(event.logger, "undefined.logger")
-    }
-    
-    func testCompleteCreation() {
-        let event = Event(message: "Hello", level: .fatal, logger: "hello.world")
-        XCTAssertEqual(event.message, "Hello")
-        XCTAssertEqual(event.level, .fatal)
-        XCTAssertEqual(event.logger, "hello.world")
     }
     
     func testRequestDict() {
-        let event = Event(message: "Hello", level: .fatal, logger: "hello.world")
+        let event = Event(message: "Hello", level: .fatal, context: Context())
         let dict = event.dict
         
         XCTAssertEqual(dict["event_id"] as? String, event.id)
         XCTAssertEqual(dict["message"] as? String, "Hello")
         XCTAssertEqual(dict["timestamp"] as? String, event.timestamp)
         XCTAssertEqual(dict["level"] as? String, "fatal")
-        XCTAssertEqual(dict["logger"] as? String, "hello.world")
         XCTAssertEqual(dict["platform"] as? String, "cocoa")
-        XCTAssertEqual(dict["sdk"] as! [String: String], Sentry.sdk)
-        XCTAssertEqual(dict["device"] as! [String: String], event.device)
     }
 }

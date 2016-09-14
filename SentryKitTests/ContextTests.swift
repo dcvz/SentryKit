@@ -23,7 +23,10 @@ class ContextTests: XCTestCase {
     
     func testClear() {
         let user = User(id: "test-id", username: "dcvz", email: "david@test.com", extra: ["extra": "value"])
-        var context = Context(user: user, tags: ["extra": "tag"], extra: ["extra": "meta"])
+        let context = Context()
+        context.user = user
+        context.tags = ["extra": "tag"]
+        context.extra = ["extra": "meta"]
         
         context.clear()
         

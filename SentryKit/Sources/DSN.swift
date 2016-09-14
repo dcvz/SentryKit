@@ -12,14 +12,8 @@ public enum DSNError: Error {
     case invalid
 }
 
-/**
- A type representing the Data Source Name.
- 
- It consists of five parts: protocol, public and secret keys, hostname and project ID.
-*/
+/// A type representing the Data Source Name.
 public struct DSN {
-    
-    // MARK: - Attributes (Public)
     
     /// The hostname of the Sentry server.
     public let host: URL
@@ -35,10 +29,14 @@ public struct DSN {
     
     /// The request endpoint URI of the Sentry server.
     internal let uri: URL
-        
     
-    // MARK: - Initializers
-    
+    /// Creates a new `DSN` object from the given DSN string.
+    ///
+    /// A DSN consists of five parts:
+    /// protocol, public and secret keys, hostname and project ID.
+    ///
+    /// - Parameter dsn: A string denoting the Data Source Name.
+    /// - Throws: An error of type `DSNError`
     public init(dsn: String) throws {
         guard
             let url = URL(string: dsn),

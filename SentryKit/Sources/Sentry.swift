@@ -14,21 +14,14 @@ public enum SentryError: Error {
 
 public class Sentry {
     
-    // MARK: - Constants
-    
+    /// Returns the shared singleton instance.
     public static let shared = Sentry()
     
     /// Information about the SDK.
     internal static let sdkName = "SentryKit"
     
-    
-    // MARK: - Attributes (Private)
-    
     /// Trail of events which happened prior to an issue.
-    fileprivate var breadcrumbs: [Breadcrumb]?
-    
-    
-    // MARK: - Attributes (Public)
+    internal var breadcrumbs: [Breadcrumb]?
     
     /// The client's Data Source Name.
     public var dsn: DSN?
@@ -42,16 +35,13 @@ public class Sentry {
     /// The environment name, such as ‘production’ or ‘staging’.
     public var environment: String?
     
-    
-    // MARK: - Public Interface
-    
-    /**
-     Reports event to Sentry.
-     - Parameter message: The message to send to Sentry.
-     - Parameter level: The severity of the event.
-     - Parameter tags: Extra tags to include with the event.
-     - Parameter extra: Extra metadata to include with the event.
-    */
+    /// Reports event to Sentry.
+    ///
+    /// - Parameter message: The message to send to Sentry.
+    /// - Parameter level: The severity of the event.
+    /// - Parameter tags: Extra tags to include with the event.
+    /// - Parameter extra: Extra metadata to include with the event.
+    /// - Throws: An error of type `SentryError`
     public func captureMessage(_ message: String, level: Event.Severity = .error, tags: [String: String] = [:], extra: [String: String] = [:]) throws {
         let event = Event(message: message,
                           level: level,
@@ -62,14 +52,14 @@ public class Sentry {
         try send(event: event)
     }
     
-    /**
-     Reports error event to Sentry.
-     - Parameter message: The message to send to Sentry.
-     - Parameter culprit: The function call which was the primary perpetrator of this event.
-     - Parameter exception: The error that occured in the application.
-     - Parameter tags: Extra tags to include with the event.
-     - Parameter extra: Extra metadata to include with the event.
-    */
+    /// Reports error event to Sentry.
+    ///
+    /// - Parameter message: The message to send to Sentry.
+    /// - Parameter culprit: The function call which was the primary perpetrator of this event.
+    /// - Parameter exception: The error that occured in the application.
+    /// - Parameter tags: Extra tags to include with the event.
+    /// - Parameter extra: Extra metadata to include with the event.
+    /// - Throws: An error of type `SentryError`
     public func captureError(message: String, culprit: String, exception: Exception, tags: [String: String] = [:], extra: [String: String] = [:]) throws {
         let event = Event(message: message,
                           level: .error,
@@ -92,11 +82,15 @@ public class Sentry {
     public func clearBreadcrumbs() {
         breadcrumbs?.removeAll()
     }
+}
+
+internal extension Sentry {
     
-    
-    // MARK: - Private Helpers
-    
-    private func send(event: Event) throws {
+    /// Reports an event to Sentry.
+    ///
+    /// - Parameter event: The event to report to Sentry.
+    /// - Throws: An error of type `SentryError` or `JSONSerialization`.
+    fileprivate func send(event: Event) throws {
         guard dsn != nil else { throw SentryError.missingDSN }
         
         let session = URLSession(configuration: URLSessionConfiguration.default)
@@ -107,7 +101,12 @@ public class Sentry {
         session.finishTasksAndInvalidate()
     }
     
-    private func prepareRequest(for event: Event, usingDSN dsn: DSN) throws -> URLRequest {
+    /// Prepares a `Request` (headers and body) for reporting an event to Sentry.
+    ///
+    /// - Parameter for: The event to generate the request for.
+    /// - Parameter dsn: The DSN to use for creating the request data.
+    /// - Throws: An error of type `JSONSerialization`
+    fileprivate func prepareRequest(for event: Event, usingDSN dsn: DSN) throws -> URLRequest {
         let sentryClient = "\(Sentry.sdkName)/\(SentryKitVersionNumber)"
         
         var authHeader: String {

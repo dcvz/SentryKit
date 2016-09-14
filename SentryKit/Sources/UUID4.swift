@@ -8,24 +8,19 @@
 
 import Foundation
 
-/// UUID (Random class)
-internal class UUID4 {
+/// A struct denoting a randomly created UUID.
+internal struct UUID4 {
     
-    // MARK: - Attributes
+    /// The individual bytes that make up the UUID.
+    private var bytes:[UInt8]!
     
-    fileprivate var bytes:[UInt8]!
-    
-    /**
-     The hexadecimal string representation of the uuid4 value.
-     The length is exactly 32 characters (no dashes!)
-    */
+    /// The hexadecimal string representation of the uuid4 value.
+    /// The length is exactly 32 characters (no dashes or spaces).
     internal var hex: String {
         return bytes.reduce("") { $0 + String(format:"%2X", $1) }
     }
     
-    
-    // MARK: - Initializers
-    
+    /// Creates a new `UUID4` object.
     internal init() {
         self.bytes = [UInt8](repeating: 0, count: 16)
         for i in 0..<16 {

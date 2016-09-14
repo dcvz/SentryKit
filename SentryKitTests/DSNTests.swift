@@ -24,10 +24,9 @@ class DSNTests: XCTestCase {
     func testValidDSN() {
         do {
             let object = try DSN(dsn: "https://public:secret@dcvz.io/1")
-            XCTAssertEqual(object.scheme, "https")
             XCTAssertEqual(object.publicKey, "public")
             XCTAssertEqual(object.secretKey, "secret")
-            XCTAssertEqual(object.host.absoluteString, "dcvz.io")
+            XCTAssertEqual(object.host.absoluteString, "https://dcvz.io")
             XCTAssertEqual(object.projectID, "1")
         } catch {
             XCTFail("Failed to parse a valid DSN")

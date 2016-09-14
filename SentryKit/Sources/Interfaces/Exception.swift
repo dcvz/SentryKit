@@ -11,8 +11,6 @@ import Foundation
 /// A struct that describes failures (errors, exceptions) in an application.
 public struct Exception {
     
-    // MARK: - Attributes
-    
     /// The description of the exception.
     public var value: String
     
@@ -22,9 +20,11 @@ public struct Exception {
     /// The module namespace.
     public var module: String?
     
-    
-    // MARK: - Initializers
-    
+    /// Creates a new `Exception` object
+    ///
+    /// - Parameter value: A basic description of the exception.
+    /// - Parameter type: The description of the exception class.
+    /// - Parameter module: The module namespace
     public init(value: String, type: String? = nil, module: String? = nil) {
         self.value = value
         self.type = type
@@ -32,10 +32,10 @@ public struct Exception {
     }
 }
 
-internal extension Exception {
-    /// The request-ready dictionary representation of the `Exception` struct.
+extension Exception: Serializable {
+    
+    /// A request-ready dictionary representation of the `Exception` struct.
     internal var dict: [String: Any] {
-        // Any value (including embedded collections) should contain only `String` types.
         let attributes: [String: Any?] = [
             "value": value,
             "type": type,

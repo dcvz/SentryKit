@@ -8,13 +8,11 @@
 
 import Foundation
 
-/**
- A struct that describes additional context data to reported events.
- Typically this is data related to the current user.
-*/
+
+/// A struct that describes additional context data to reported events.
+///
+/// This is typically data related to the current user.
 public class Context {
-    
-    // MARK: - Attributes
     
     /// The authenticated user to associate events to.
     public var user: User?
@@ -24,18 +22,6 @@ public class Context {
     
     /// A dictionary of metadata that will be applied to every reported event.
     public var extra: [String: String] = [:]
-    
-    
-    // MARK: - Initializers
-    
-    public init(user: User? = nil, tags: [String: String] = [:], extra: [String: String] = [:]) {
-        self.user = user
-        self.tags = tags
-        self.extra = extra
-    }
-    
-    
-    // MARK: - Public Interface
     
     /// Clears the context for future events.
     public func clear() {

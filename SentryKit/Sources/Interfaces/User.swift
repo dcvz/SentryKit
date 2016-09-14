@@ -11,8 +11,6 @@ import Foundation
 /// A struct that describes the authenticated user for a request.
 public struct User {
     
-    // MARK: - Attributes
-    
     /// The unique ID of the user.
     public var id: String = ""
     
@@ -23,12 +21,15 @@ public struct User {
     public var email: String?
     
     /// A dictionary of extra metadata that will be attributed to the user.
-    public var extra: [String: String] = [:]
+    public var extra: [String: String]?
     
-    
-    // MARK: - Initializers
-    
-    public init(id: String, username: String? = nil, email: String? = nil, extra: [String: String] = [:]) {
+    /// Creates a new `User` object.
+    ///
+    /// - Parameter id: The unique ID of the user.
+    /// - Parameter username: The username of the user.
+    /// - Parameter email: The email of the user.
+    /// - Parameter extra: Additional metadata about the user.
+    public init(id: String, username: String? = nil, email: String? = nil, extra: [String: String]? = nil) {
         self.id = id
         self.username = username
         self.email = email
@@ -36,10 +37,10 @@ public struct User {
     }
 }
 
-internal extension User {
-    /// The request-ready dictionary representation of the `User` struct.
+extension User: Serializable {
+    
+    /// A request-ready dictionary representation of the `User` struct.
     internal var dict: [String: Any] {
-        // Any value (including embedded collections) should contain only `String` types.
         let attributes: [String: Any?] = [
             "id": id,
             "email": email,
