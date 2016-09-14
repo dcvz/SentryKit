@@ -1,0 +1,16 @@
+PODS:
+  - SentryKit (0.1.0)
+
+DEPENDENCIES:
+  - SentryKit (from `../`)
+
+EXTERNAL SOURCES:
+  SentryKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SentryKit: 8f61e08171e195c6b95b8218b45234056c4c09c0
+
+PODFILE CHECKSUM: 4fc58a60d9c9f8508d2364d5ad3a63fd2ac5196f
+
+COCOAPODS: 1.1.0.beta.2
