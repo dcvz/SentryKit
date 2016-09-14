@@ -2,7 +2,7 @@
 //  SentryKit.h
 //  SentryKit
 //
-//  Created by David Chavez on 9/3/16.
+//  Created by David Chavez on 3/9/16.
 //  Copyright © 2016 David Chavez. All rights reserved.
 //
 
