@@ -8,8 +8,12 @@
 
 import Foundation
 
+public func ==(lhs: Breadcrumb, rhs: Breadcrumb) -> Bool {
+    return lhs.timestamp == rhs.timestamp && lhs.category == rhs.category
+}
+
 /// A struct that describes an application event, or “breadcrumb”, that occurred before the main event.
-public struct Breadcrumb {
+public struct Breadcrumb: Equatable {
     
     /// Denotes the severity level of a breadcrumb.
     public enum Severity: String {

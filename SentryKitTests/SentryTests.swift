@@ -37,9 +37,44 @@ class SentryTests: XCTestCase {
         }
     }
     
-    func testSendEvent() {
-        try! Sentry.shared.captureMessage("request.success.test")
+    func testCaptureErrorMissingDSN() {
+        Sentry.shared.dsn = nil
         
-        // TO:DO - inspect request content
+        do {
+            try Sentry.shared.captureError(message: "", culprit: "", exception: Exception(value: ""))
+            XCTFail("Should throw with missing DSN")
+        } catch let e as SentryError {
+            XCTAssertEqual(e, SentryError.missingDSN)
+        } catch {
+            XCTFail("Wrong error type")
+        }
+
+    }
+    
+    func testAddingBreadcrumbs() {
+        let client = Sentry.shared
+        
+        let firstBC = Breadcrumb(category: "first-bc")
+        let secondBC = Breadcrumb(category: "second-bc")
+        
+        client.addBreadcrumb(firstBC)
+        client.addBreadcrumb(secondBC)
+        
+        XCTAssertEqual(client.breadcrumbs!.first!, firstBC)
+        XCTAssertEqual(client.breadcrumbs!.last!, secondBC)
+    }
+    
+    func testClearingBreadcrumbs() {
+        let client = Sentry.shared
+        
+        let firstBC = Breadcrumb(category: "first-bc")
+        let secondBC = Breadcrumb(category: "second-bc")
+        
+        client.addBreadcrumb(firstBC)
+        client.addBreadcrumb(secondBC)
+        
+        client.clearBreadcrumbs()
+        
+        XCTAssert(client.breadcrumbs == nil)
     }
 }

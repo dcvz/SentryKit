@@ -80,7 +80,7 @@ public class Sentry {
     
     /// Clears the breadcrumb trail.
     public func clearBreadcrumbs() {
-        breadcrumbs?.removeAll()
+        breadcrumbs = nil
     }
 }
 
