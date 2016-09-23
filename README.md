@@ -106,11 +106,11 @@ client.addBreadcrumb(readBC)
 // there's two build methods that will allow you to create those correctly
 
 // this describes a URL change in a web app, a UI transition in a mobile application, etc.
-let navBC = Breadcrumb.navigationBreadcrumb(from: "launch", to: "firstViewController")
+let navBC = Breadcrumb.makeNavigationBreadcrumb(from: "launch", to: "firstViewController")
 client.addBreadcrumb(navBC)
 
 // this represents an HTTP request transmitted from your application.
-let requestBC = Breadcrumb.Breadcrumb.httpBreadcrumb(url: "http://dcvz.io", method: "GET", statusCode: 200, reason: "OK")
+let requestBC = Breadcrumb.makeHttpBreadcrumb(url: "http://dcvz.io", method: "GET", statusCode: 200, reason: "OK")
 client.addBreadcrumb(requestBC)
 
 // you may also clear breadcrumbs

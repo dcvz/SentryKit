@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         client.context.extra = ["test-extra": "value"]
         
         // Add first breadcrumb
-        let viewedBC = Breadcrumb.navigationBreadcrumb(from: "Launch", to: "\(type(of: self))")
+        let viewedBC = Breadcrumb.makeNavigationBreadcrumb(from: "Launch", to: "\(type(of: self))")
         client.addBreadcrumb(viewedBC)
     }
 

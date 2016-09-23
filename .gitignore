@@ -2,6 +2,7 @@
 *.xcworkspace
 !default.xcworkspace
 profile
+*.swift-version
 
 # Xcode
 #

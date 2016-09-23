@@ -93,7 +93,7 @@ public extension Breadcrumb {
     /// - Parameters:
     ///   - from: A string representing the original application state / location.
     ///   - to: A string representing the new application state / location.
-    public static func navigationBreadcrumb(from: String, to: String) -> Breadcrumb {
+    public static func makeNavigationBreadcrumb(from: String, to: String) -> Breadcrumb {
         return Breadcrumb(type: "navigation", data: ["from": from, "to": to])
     }
     
@@ -110,7 +110,7 @@ public extension Breadcrumb {
     ///   - method: The HTTP request method.
     ///   - statusCode: The HTTP status code of the response.
     ///   - reason: A text that describes the status code.
-    public static func httpBreadcrumb(url: String, method: String, statusCode: Int, reason: String) -> Breadcrumb {
+    public static func makeHttpBreadcrumb(url: String, method: String, statusCode: Int, reason: String) -> Breadcrumb {
         return Breadcrumb(type: "http", data: ["url": url, "method": method, "status_code": statusCode, "reason": reason])
     }
 }
