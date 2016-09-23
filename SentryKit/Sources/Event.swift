@@ -23,7 +23,7 @@ public struct Event {
     
     /// Hexadecimal string representing a uuid4 value.
     /// The length is exactly 32 characters (no dashes or spaces).
-    internal let id: String = UUID4().hex
+    internal let id: String = UUID().uuidString.replacingOccurrences(of: "-", with: "")
     
     /// User-readable representation of this event.
     /// Maximum length is 1000 characters.

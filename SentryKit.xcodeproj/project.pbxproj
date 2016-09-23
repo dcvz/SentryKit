@@ -22,7 +22,6 @@
 		9B2966621D89ECB6006DB7D1 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2966611D89ECB6006DB7D1 /* UserTests.swift */; };
 		9B2966641D89EDE8006DB7D1 /* BreadcrumbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2966631D89EDE8006DB7D1 /* BreadcrumbTests.swift */; };
 		9B2966661D89F14E006DB7D1 /* DictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2966651D89F14E006DB7D1 /* DictionaryTests.swift */; };
-		9B4558431D942AE3009517D8 /* UUID4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4558421D942AE3009517D8 /* UUID4.swift */; };
 		9B4558451D942AF6009517D8 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4558441D942AF6009517D8 /* JSON.swift */; };
 		9B56532E1D834F910022E282 /* ContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56532D1D834F910022E282 /* ContextTests.swift */; };
 		9B5653301D83515B0022E282 /* SentryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56532F1D83515B0022E282 /* SentryTests.swift */; };
@@ -31,7 +30,6 @@
 		9B73E4F01D7A3E1100FF65D3 /* SentryKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B73E4E21D7A3E1100FF65D3 /* SentryKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B73E5051D7A3EC200FF65D3 /* DSNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B73E5041D7A3EC200FF65D3 /* DSNTests.swift */; };
 		9B73E5071D7A431F00FF65D3 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B73E5061D7A431E00FF65D3 /* EventTests.swift */; };
-		9B73E5091D7A448800FF65D3 /* UUID4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B73E5081D7A448800FF65D3 /* UUID4Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +58,6 @@
 		9B2966611D89ECB6006DB7D1 /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
 		9B2966631D89EDE8006DB7D1 /* BreadcrumbTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreadcrumbTests.swift; sourceTree = "<group>"; };
 		9B2966651D89F14E006DB7D1 /* DictionaryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryTests.swift; sourceTree = "<group>"; };
-		9B4558421D942AE3009517D8 /* UUID4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUID4.swift; sourceTree = "<group>"; };
 		9B4558441D942AF6009517D8 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		9B56532D1D834F910022E282 /* ContextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextTests.swift; sourceTree = "<group>"; };
 		9B56532F1D83515B0022E282 /* SentryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentryTests.swift; sourceTree = "<group>"; };
@@ -72,7 +69,6 @@
 		9B73E4EF1D7A3E1100FF65D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B73E5041D7A3EC200FF65D3 /* DSNTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSNTests.swift; sourceTree = "<group>"; };
 		9B73E5061D7A431E00FF65D3 /* EventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
-		9B73E5081D7A448800FF65D3 /* UUID4Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUID4Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +122,6 @@
 		9B4558411D942AE3009517D8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				9B4558421D942AE3009517D8 /* UUID4.swift */,
 				9B4558441D942AF6009517D8 /* JSON.swift */,
 			);
 			path = Utils;
@@ -167,7 +162,6 @@
 				9B56532F1D83515B0022E282 /* SentryTests.swift */,
 				9B73E5041D7A3EC200FF65D3 /* DSNTests.swift */,
 				9B73E5061D7A431E00FF65D3 /* EventTests.swift */,
-				9B73E5081D7A448800FF65D3 /* UUID4Tests.swift */,
 				9B56532D1D834F910022E282 /* ContextTests.swift */,
 				9B29665F1D89EBBF006DB7D1 /* ExceptionTests.swift */,
 				9B2966611D89ECB6006DB7D1 /* UserTests.swift */,
@@ -321,7 +315,6 @@
 				9B1F71591D888E8600D906A2 /* Breadcrumb.swift in Sources */,
 				9B4558451D942AF6009517D8 /* JSON.swift in Sources */,
 				9B1F714D1D884F1700D906A2 /* Event.swift in Sources */,
-				9B4558431D942AE3009517D8 /* UUID4.swift in Sources */,
 				9B1F71501D884F1700D906A2 /* Exception.swift in Sources */,
 				9B1F71521D884F1700D906A2 /* Sentry.swift in Sources */,
 				9B29665E1D89C807006DB7D1 /* Serializable.swift in Sources */,
@@ -335,7 +328,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B73E5091D7A448800FF65D3 /* UUID4Tests.swift in Sources */,
 				9B2966601D89EBBF006DB7D1 /* ExceptionTests.swift in Sources */,
 				9B2966641D89EDE8006DB7D1 /* BreadcrumbTests.swift in Sources */,
 				9B56532E1D834F910022E282 /* ContextTests.swift in Sources */,

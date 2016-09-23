@@ -27,6 +27,11 @@ class EventTests: XCTestCase {
         XCTAssertEqual(event.level, .error)
     }
     
+    func testUUID() {
+        let event = Event(message: "Hello", context: Context())
+        XCTAssert(event.id.contains(" ") == false)
+    }
+    
     func testRequestDict() {
         let event = Event(message: "Hello", level: .fatal, context: Context())
         let dict = event.json
