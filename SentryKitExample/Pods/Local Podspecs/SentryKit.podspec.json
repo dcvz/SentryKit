@@ -18,5 +18,5 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "SentryKit/Sources/**/*"
+  "source_files": "SentryKit/Sources/**/*.swift"
 }

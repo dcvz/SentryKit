@@ -23,7 +23,7 @@ class UserTests: XCTestCase {
     
     func testRequestDict() {
         let user = User(id: "user-id", username: "dcvz", email: "david@awesome.com", extra: ["key": "value"])
-        let dict = user.dict
+        let dict = user.json
         
         XCTAssertEqual(dict["id"] as! String, "user-id")
         XCTAssertEqual(dict["username"] as! String, "dcvz")

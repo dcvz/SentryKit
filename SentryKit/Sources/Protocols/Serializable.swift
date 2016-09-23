@@ -10,7 +10,8 @@ import Foundation
 
 /// A type that provides a request-ready dictionary representation of self.
 internal protocol Serializable {
+    associatedtype SerializableType
     
     /// - Note: Any value (including embedded collections) should contain only primitive types.
-    var dict: [String: Any] { get }
+    var json: SerializableType { get }
 }

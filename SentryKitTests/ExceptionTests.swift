@@ -23,7 +23,7 @@ class ExceptionTests: XCTestCase {
     
     func testRequestDict() {
         let exception = Exception(value: "text-exception", type: "awesome", module: "test")
-        let dict = exception.dict
+        let dict = exception.json
         
         XCTAssertEqual(dict["module"] as? String, "test")
         XCTAssertEqual(dict["type"] as? String, "awesome")

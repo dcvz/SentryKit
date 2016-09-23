@@ -11,6 +11,8 @@ import Foundation
 /// A struct denoting a randomly created UUID.
 internal struct UUID4 {
     
+    // MARK: - Attributes
+    
     /// The individual bytes that make up the UUID.
     private var bytes:[UInt8]!
     
@@ -19,6 +21,9 @@ internal struct UUID4 {
     internal var hex: String {
         return bytes.reduce("") { $0 + String(format:"%2X", $1) }
     }
+    
+    
+    // MARK: - Instantiation
     
     /// Creates a new `UUID4` object.
     internal init() {

@@ -31,7 +31,7 @@ class ContextTests: XCTestCase {
         context.clear()
         
         XCTAssert(context.user == nil)
-        XCTAssertEqual(context.tags, [:])
-        XCTAssertEqual(context.extra, [:])
+        XCTAssert(context.tags == nil)
+        XCTAssert(context.extra == nil)
     }
 }

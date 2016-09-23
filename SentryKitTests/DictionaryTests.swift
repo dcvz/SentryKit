@@ -27,8 +27,8 @@ class DictionaryTests: XCTestCase {
         
         let combined = first + second
         
-        XCTAssertEqual(combined["key"], "modified")
-        XCTAssertEqual(combined["test"], "sample")
-        XCTAssertEqual(combined["other"], "thing")
+        XCTAssertEqual(combined!["key"], "modified")
+        XCTAssertEqual(combined!["test"], "sample")
+        XCTAssertEqual(combined!["other"], "thing")
     }
 }

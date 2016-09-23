@@ -15,6 +15,8 @@ public enum DSNError: Error {
 /// A type representing the Data Source Name.
 public struct DSN {
     
+    // MARK: - Attributes
+    
     /// The hostname of the Sentry server.
     public let host: URL
     
@@ -29,6 +31,9 @@ public struct DSN {
     
     /// The request endpoint URI of the Sentry server.
     internal let uri: URL
+    
+    
+    // MARK: - Instantiation
     
     /// Creates a new `DSN` object from the given DSN string.
     ///

@@ -23,14 +23,15 @@ class ViewController: UIViewController {
         // Do any additional setup after loadi
         
         // Setup Sentry
-        let dsn = try! DSN(dsn: "https://64ab0699ae5f4c9d90a7136741c7ccda:96ade5738c574a1b80358870acf2b062@sentry.io/98065")
+        let dsn = try! DSN(dsn: "https://public:secret@dcvz.io/1")
         client.dsn = dsn
         client.hostVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         client.environment = "testing"
         
         let user = User(id: "test-id")
         client.context.user = user
-        client.context.tags = ["test-tag": "value"]
+        client.context.user?.extra = ["age": 22]
+        client.context.tags = ["jailbroken": true]
         client.context.extra = ["test-extra": "value"]
         
         // Add first breadcrumb

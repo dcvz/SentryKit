@@ -29,7 +29,7 @@ class EventTests: XCTestCase {
     
     func testRequestDict() {
         let event = Event(message: "Hello", level: .fatal, context: Context())
-        let dict = event.dict
+        let dict = event.json
         
         XCTAssertEqual(dict["event_id"] as? String, event.id)
         XCTAssertEqual(dict["message"] as? String, "Hello")

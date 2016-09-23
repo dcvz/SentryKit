@@ -30,7 +30,7 @@ class BreadcrumbTests: XCTestCase {
         XCTAssertEqual(breadcrumb.category, nil)
         XCTAssertEqual(breadcrumb.message, nil)
         
-        let dict = breadcrumb.dict
+        let dict = breadcrumb.json
         
         XCTAssertEqual(dict["type"] as! String, "navigation")
         XCTAssertEqual(dict["level"] as! String, "info")
@@ -50,7 +50,7 @@ class BreadcrumbTests: XCTestCase {
         XCTAssertEqual(breadcrumb.data!["status_code"] as! Int, 200)
         XCTAssertEqual(breadcrumb.data!["reason"] as! String, "OK")
         
-        let dict = breadcrumb.dict
+        let dict = breadcrumb.json
         
         XCTAssertEqual(dict["type"] as! String, "http")
         XCTAssertEqual(dict["level"] as! String, "info")
@@ -58,7 +58,7 @@ class BreadcrumbTests: XCTestCase {
     
     func testRequestDict() {
         let breadcrumb = Breadcrumb.navigationBreadcrumb(from: "launch", to: "view")
-        let dict = breadcrumb.dict
+        let dict = breadcrumb.json
         
         XCTAssertEqual(dict["type"] as! String, "navigation")
         XCTAssertEqual(dict["level"] as! String, "info")

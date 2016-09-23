@@ -8,6 +8,45 @@
 
 import Foundation
 
+/// Adds two dictionaries. It will prioritize
+/// the right hand keys if both sides are non-nil.
+/// - Parameters:
+///   - lhs: The left-hand side of the operation.
+///   - rhs: The right-hand side of the operation.
+internal func + <T, U>(lhs: [T: U]?, rhs: [T: U]?) -> [T: U]? {
+    if lhs == nil && rhs == nil { return nil }
+    else if lhs == nil { return rhs }
+    else if rhs == nil { return lhs }
+    
+    var merged = lhs!
+    for (key, val) in rhs! {
+        merged[key] = val
+    }
+    
+    return merged
+}
+
+internal extension Dictionary {
+    
+    /// Returns a dictionary containing the results of mapping the given closure
+    /// over the dictionary's values.
+    ///
+    /// - Parameter transform: A mapping closure. `transform` accepts a
+    ///   value of this dictionary as its parameter and returns a transformed
+    ///   value of the same or of a different type.
+    /// - Returns: A dictionary containing the transformed values of this
+    ///   dictionary.
+    internal func map<T>(_ transform: (Value) throws -> T) rethrows -> [Key: T] {
+        var accum = Dictionary<Key, T>(minimumCapacity: self.count)
+        
+        for (key, value) in self {
+            accum[key] = try transform(value)
+        }
+        
+        return accum
+    }
+}
+
 internal protocol OptionalType {
     associatedtype Wrapped
     var asOptional : Wrapped? { get }
@@ -20,7 +59,12 @@ extension Optional : OptionalType {
 }
 
 internal extension Dictionary where Value: OptionalType {
-    internal func filteringNil() -> [Key: Any] {
+    
+    
+    /// Removes any `nil` values from the dictionary.
+    ///
+    /// - Returns: A dictionary that doesn't contain nil values.
+    internal func removingNil() -> [Key: Any] {
         return self.reduce([:]) { original, pair in
             var copy = original
             
@@ -31,19 +75,4 @@ internal extension Dictionary where Value: OptionalType {
             return copy
         }
     }
-}
-
-/// Adds two dictionaries, with priority on right hand keys
-func + <K, V> (left: [K: V], right: [K: V]) -> [K: V] {
-    var ret: [K: V] = [:]
-    
-    for (k, v) in left {
-        ret.updateValue(v, forKey: k)
-    }
-    
-    for (k, v) in right {
-        ret.updateValue(v, forKey: k)
-    }
-    
-    return ret
 }

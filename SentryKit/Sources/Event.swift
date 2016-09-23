@@ -11,10 +11,15 @@ import Foundation
 /// A struct that describes an event to be reported.
 public struct Event {
     
+    // MARK: - Enums
+    
     /// Denotes the severity level of an event.
     public enum Severity: String {
         case fatal, error, warning, info, debug
     }
+    
+    
+    // MARK: - Attributes
     
     /// Hexadecimal string representing a uuid4 value.
     /// The length is exactly 32 characters (no dashes or spaces).
@@ -51,21 +56,25 @@ public struct Event {
     internal let exception: Exception?
     
     /// A dictionary of tags for this event.
-    internal let tags: [String: String]
+    internal let tags: [String: Any]?
     
     /// A dictionary of of additional metadata to store with the event.
-    internal let extra: [String: String]
+    internal let extra: [String: Any]?
+    
+    
+    // MARK: - Instantiation
     
     /// Creates a new `Event` object.
     ///
-    /// - Parameter message: A user-readable representation of this event.
-    /// - Parameter level: The severity of the event (defaults to error).
-    /// - Parameter context: The global context to attach to events.
-    /// - Parameter culprit: The function call which was the primary perpetrator of the event.
-    /// - Parameter exception: The error that occured.
-    /// - Parameter tags: Additional tags to attach to the event.
-    /// - Parameter extra: Additional metadata to attach to the event.
-    internal init(message: String, level: Severity = .error, context: Context, culprit: String? = nil, exception: Exception? = nil, tags: [String: String] = [:], extra: [String: String] = [:]) {
+    /// - Parameters:
+    ///   - message: A user-readable representation of this event.
+    ///   - level: The severity of the event (defaults to error).
+    ///   - context: The global context to attach to events.
+    ///   - culprit: The function call which was the primary perpetrator of the event.
+    ///   - exception: The error that occured.
+    ///   - tags: Additional tags to attach to the event.
+    ///   - extra: Additional metadata to attach to the event.
+    internal init(message: String, level: Severity = .error, context: Context, culprit: String? = nil, exception: Exception? = nil, tags: [String: Any]? = nil, extra: [String: Any]? = nil) {
         self.message = message
         self.level = level
         self.user = context.user
@@ -76,23 +85,26 @@ public struct Event {
     }    
 }
 
+
+// MARK: - Serializable Protocol Extension
+
 extension Event: Serializable {
     
     /// A request-ready dictionary representation of the `Event` struct.
-    internal var dict: [String: Any] {
+    internal var json: [String: Any] {
         let attributes: [String: Any?] = [
             "event_id": id,
             "message": message,
             "timestamp": timestamp,
             "level": level.rawValue,
             "platform": "cocoa",
-            "user": user?.dict,
+            "user": user?.json,
             "culprit": culprit,
-            "exception": exception == nil ? nil : ["values": [exception!.dict]],
+            "exception": exception == nil ? nil : ["values": [exception!.json]],
             "tags": tags,
             "extra": extra,
         ]
         
-        return attributes.filteringNil()
+        return JSON.sanitize(json: attributes.removingNil()) as! [String: Any]
     }
 }

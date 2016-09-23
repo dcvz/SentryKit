@@ -14,6 +14,8 @@ public enum SentryError: Error {
 
 public class Sentry {
     
+    // MARK: - Attributes
+    
     /// Returns the shared singleton instance.
     public static let shared = Sentry()
     
@@ -35,14 +37,18 @@ public class Sentry {
     /// The environment name, such as ‘production’ or ‘staging’.
     public var environment: String?
     
+    
+    // MARK: - Public Interface
+    
     /// Reports event to Sentry.
     ///
-    /// - Parameter message: The message to send to Sentry.
-    /// - Parameter level: The severity of the event.
-    /// - Parameter tags: Extra tags to include with the event.
-    /// - Parameter extra: Extra metadata to include with the event.
+    /// - Parameters:
+    ///   - message: The message to send to Sentry.
+    ///   - level: The severity of the event.
+    ///   - tags: Extra tags to include with the event.
+    ///   - extra: Extra metadata to include with the event.
     /// - Throws: An error of type `SentryError`
-    public func captureMessage(_ message: String, level: Event.Severity = .error, tags: [String: String] = [:], extra: [String: String] = [:]) throws {
+    public func captureMessage(_ message: String, level: Event.Severity = .error, tags: [String: Any]? = nil, extra: [String: Any]? = nil) throws {
         let event = Event(message: message,
                           level: level,
                           context: context,
@@ -54,13 +60,14 @@ public class Sentry {
     
     /// Reports error event to Sentry.
     ///
-    /// - Parameter message: The message to send to Sentry.
-    /// - Parameter culprit: The function call which was the primary perpetrator of this event.
-    /// - Parameter exception: The error that occured in the application.
-    /// - Parameter tags: Extra tags to include with the event.
-    /// - Parameter extra: Extra metadata to include with the event.
+    /// - Parameters:
+    ///   - message: The message to send to Sentry.
+    ///   - culprit: The function call which was the primary perpetrator of this event.
+    ///   - exception: The error that occured in the application.
+    ///   - tags: Extra tags to include with the event.
+    ///   - extra: Extra metadata to include with the event.
     /// - Throws: An error of type `SentryError`
-    public func captureError(message: String, culprit: String, exception: Exception, tags: [String: String] = [:], extra: [String: String] = [:]) throws {
+    public func captureError(message: String, culprit: String, exception: Exception, tags: [String: Any]? = nil, extra: [String: Any]? = nil) throws {        
         let event = Event(message: message,
                           level: .error,
                           context: context,
@@ -84,6 +91,9 @@ public class Sentry {
     }
 }
 
+
+// MARK: - Network Requests Extension
+
 internal extension Sentry {
     
     /// Reports an event to Sentry.
@@ -103,8 +113,9 @@ internal extension Sentry {
     
     /// Prepares a `Request` (headers and body) for reporting an event to Sentry.
     ///
-    /// - Parameter for: The event to generate the request for.
-    /// - Parameter dsn: The DSN to use for creating the request data.
+    /// - Parameters:
+    ///   - for: The event to generate the request for.
+    ///   - dsn: The DSN to use for creating the request data.
     /// - Throws: An error of type `JSONSerialization`
     fileprivate func prepareRequest(for event: Event, usingDSN dsn: DSN) throws -> URLRequest {
         let sentryClient = "\(Sentry.sdkName)/\(SentryKitVersionNumber)"
@@ -132,12 +143,12 @@ internal extension Sentry {
         let additionalRequestData: [String: Any?] = [
             "release": hostVersion,
             "environment": environment,
-            "breadcrumbs": breadcrumbs?.map() { $0.dict },
+            "breadcrumbs": breadcrumbs?.map() { $0.json },
             "sdk": ["name": Sentry.sdkName, "version": "\(SentryKitVersionNumber)"]
         ]
         
-        let requestData = event.dict + additionalRequestData.filteringNil()
-        request.httpBody = try JSONSerialization.data(withJSONObject: requestData, options: [])
+        let requestData = event.json + additionalRequestData.removingNil()
+        request.httpBody = try JSONSerialization.data(withJSONObject: requestData!, options: [])
         
         return request
     }
