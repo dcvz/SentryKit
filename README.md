@@ -1,6 +1,6 @@
 # SentryKit
 
-![platforms](https://img.shields.io/badge/platform-iOS-lightgrey.svg) ![pod](https://img.shields.io/badge/pod-v0.1.0-red.svg) [![social](https://img.shields.io/badge/twitter-%40dchavezlive-blue.svg)](https://twitter.com/dchavezlive)
+![platforms](https://img.shields.io/badge/platform-iOS-lightgrey.svg) ![pod](https://img.shields.io/badge/pod-v0.1.1-red.svg) [![social](https://img.shields.io/badge/twitter-%40dchavezlive-blue.svg)](https://twitter.com/dchavezlive)
 
 A client for the [Sentry](https://github.com/getsentry/sentry) error reporting API written in Swift.
 
