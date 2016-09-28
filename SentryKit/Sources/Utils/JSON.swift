@@ -3,6 +3,7 @@
 //  SentryKit
 //
 //  Created by David Chavez on 22/9/16.
+//  Inspired by Argo: a functional JSON parsing library for Swift.
 //  Copyright © 2016 David Chavez. All rights reserved.
 //
 

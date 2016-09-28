@@ -9,6 +9,8 @@
 import Foundation
 
 extension NSNumber {
+    
+    /// Returns wether it is representing a `Bool` value.
     var isBool: Bool {
         return CFBooleanGetTypeID() == CFGetTypeID(self)
     }
