@@ -1,6 +1,0 @@
-framework module SentryKit {
-  umbrella header "SentryKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

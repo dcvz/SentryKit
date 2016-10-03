@@ -6,6 +6,7 @@
 //  Copyright (c) 2016 David Chavez. All rights reserved.
 //
 
+import GZIP
 import Foundation
 
 public enum SentryError: Error {
@@ -139,16 +140,19 @@ internal extension Sentry {
         request.addValue("\(sentryClient)", forHTTPHeaderField: "User-Agent")
         request.addValue(authHeader, forHTTPHeaderField: "X-Sentry-Auth")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("gzip", forHTTPHeaderField: "Content-Encoding")
         
-        let additionalRequestData: [String: Any?] = [
+        let additionalRequestMetadata: [String: Any?] = [
             "release": hostVersion,
             "environment": environment,
             "breadcrumbs": breadcrumbs?.map() { $0.json },
             "sdk": ["name": Sentry.sdkName, "version": "\(SentryKitVersionNumber)"]
         ]
         
-        let requestData = event.json + additionalRequestData.removingNil()
-        request.httpBody = try JSONSerialization.data(withJSONObject: requestData!, options: [])
+        let requestMetadata = event.json + additionalRequestMetadata.removingNil()
+        let requestData = try JSONSerialization.data(withJSONObject: requestMetadata!, options: [])
+        
+        request.httpBody = (requestData as NSData).gzippedData(withCompressionLevel: -1)
         
         return request
     }

@@ -1,5 +1,7 @@
 PODS:
-  - SentryKit (0.1.0)
+  - GZIP (1.1.1)
+  - SentryKit (0.1.1):
+    - GZIP (= 1.1.1)
 
 DEPENDENCIES:
   - SentryKit (from `../`)
@@ -9,7 +11,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SentryKit: 883e15ecb8a5d5e550e58509269fdef0c237c7b2
+  GZIP: f8beb59597f651e6970a45b816508a9c6d700b77
+  SentryKit: ccea03178fd46cf21d09e261d36bb172fd78568a
 
 PODFILE CHECKSUM: 4fc58a60d9c9f8508d2364d5ad3a63fd2ac5196f
 
